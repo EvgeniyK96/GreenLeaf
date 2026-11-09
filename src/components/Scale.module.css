@@ -1,0 +1,113 @@
+.grid {
+  margin-top: var(--s-7);
+  display: grid;
+  gap: var(--s-7);
+}
+
+.col {
+  display: grid;
+  gap: var(--s-4);
+  align-content: start;
+}
+
+.h3 {
+  font-size: var(--t-xl);
+  margin-top: var(--s-3);
+}
+.h3:first-child {
+  margin-top: 0;
+}
+
+.facts {
+  list-style: none;
+  display: grid;
+  gap: var(--s-2);
+}
+.facts li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.facts li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--c-sprout);
+  border-radius: 6px 1px 6px 1px;
+}
+
+.photos {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-2);
+}
+.photos img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--r-leaf-sm);
+}
+.photoPh {
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-content: center;
+  gap: var(--s-1);
+  text-align: center;
+  padding: var(--s-2);
+  font-size: var(--t-xs);
+  color: var(--c-muted);
+  border: 1px dashed var(--c-line);
+  border-radius: var(--r-leaf-sm);
+  background: var(--c-mint);
+}
+
+.schedule {
+  font-weight: 600;
+  color: var(--c-forest);
+}
+
+.mentor {
+  padding: var(--s-6) var(--s-5);
+  background: var(--c-mint);
+  border-radius: var(--r-leaf);
+  justify-items: start;
+}
+
+.mentorName {
+  color: var(--c-muted);
+  margin-top: calc(var(--s-3) * -1);
+}
+
+.checks {
+  list-style: none;
+  display: grid;
+  gap: var(--s-3);
+}
+.checks li {
+  position: relative;
+  padding-left: 2rem;
+}
+.checks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 8px 2px 8px 2px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3L15 6.5' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
+      center / 80% no-repeat,
+    var(--c-leaf);
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--s-8);
+  }
+}

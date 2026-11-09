@@ -1,0 +1,129 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 70% at 100% 0%, var(--c-mint) 0%, transparent 60%),
+    var(--c-paper);
+  padding-top: 150px;
+  padding-bottom: clamp(3rem, 2rem + 4vw, 5.5rem);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+.intro {
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--c-leaf);
+}
+
+.title {
+  margin-top: var(--s-3);
+  font-size: var(--t-3xl);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  max-width: 15ch;
+}
+
+.lead {
+  margin-top: var(--s-5);
+  font-size: var(--t-lg);
+  line-height: 1.5;
+  color: var(--c-ink);
+  max-width: 54ch;
+}
+
+.actions {
+  margin-top: var(--s-6);
+}
+
+.actions a {
+  flex: 1 1 100%;
+}
+
+.proof {
+  list-style: none;
+  margin-top: var(--s-7);
+  display: grid;
+  gap: var(--s-3);
+}
+
+.proof li {
+  display: grid;
+  grid-template-columns: 5.2rem 1fr;
+  align-items: baseline;
+  gap: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--c-line);
+}
+
+.proofValue {
+  font-family: var(--f-display);
+  font-weight: 650;
+  font-size: 1.35rem;
+  color: var(--c-leaf);
+  font-variant-numeric: tabular-nums;
+}
+
+.proofLabel {
+  font-size: var(--t-sm);
+  color: var(--c-muted);
+  line-height: 1.4;
+}
+
+@media (min-width: 560px) {
+  .actions a {
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding-top: clamp(5rem, 9vh, 8rem);
+    min-height: min(860px, calc(100svh - var(--header-h)));
+    display: flex;
+    align-items: center;
+  }
+  .inner {
+    width: 100%;
+  }
+  .title,
+  .lead,
+  .proof {
+    max-width: min(46rem, 58%);
+  }
+  .title {
+    max-width: min(15ch, 60%);
+  }
+  .proof {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-5);
+  }
+  .proof li {
+    grid-template-columns: 1fr;
+    gap: var(--s-1);
+  }
+}
+
+/* Единственная анимация загрузки: короткий подъём кнопок и фактов. Заголовок и подзаголовок
+   видны сразу — они кандидаты LCP, анимация прозрачности задержала бы метрику. */
+@media (prefers-reduced-motion: no-preference) {
+  .seq {
+    animation: rise var(--d-slow) var(--ease-out) both;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

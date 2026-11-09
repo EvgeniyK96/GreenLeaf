@@ -1,0 +1,63 @@
+.bar {
+  position: fixed;
+  z-index: 50;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: max(12px, env(safe-area-inset-bottom));
+  display: flex;
+  justify-content: center;
+  transform: translateY(140%);
+  transition: transform var(--d-base) var(--ease-out);
+  pointer-events: none;
+}
+
+.on {
+  transform: none;
+}
+.on .btn {
+  pointer-events: auto;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 420px;
+  min-height: 54px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  text-decoration: none;
+  background: var(--c-leaf);
+  border-radius: 20px 5px 20px 5px;
+  box-shadow: 0 16px 30px -12px rgb(16 54 42 / 0.6);
+}
+.btn:hover {
+  color: #fff;
+  background: var(--c-leaf-hover);
+}
+
+@media (min-width: 960px) {
+  .bar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    transition: none;
+  }
+}
+
+/* Первое появление тоже плавное */
+@media (prefers-reduced-motion: no-preference) {
+  .on {
+    animation: slide-in var(--d-base) var(--ease-out);
+  }
+}
+@keyframes slide-in {
+  from {
+    transform: translateY(140%);
+  }
+}

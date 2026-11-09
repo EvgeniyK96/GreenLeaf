@@ -1,0 +1,158 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--c-paper);
+  color: var(--c-ink);
+  font-family: var(--f-body);
+  font-size: var(--t-base);
+  line-height: var(--lh-body);
+  font-feature-settings: 'tnum' 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--f-display);
+  line-height: var(--lh-tight);
+  color: var(--c-forest);
+  margin: 0;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--c-leaf);
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+a:hover {
+  color: var(--c-leaf-hover);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--c-lime);
+  color: var(--c-forest);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 100;
+  background: var(--c-forest);
+  color: var(--c-paper);
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-sm);
+}
+.skip-link:focus {
+  top: var(--s-3);
+  color: var(--c-paper);
+}
+
+section[id],
+[id='zayavka'] {
+  scroll-margin-top: calc(var(--header-h) + 8px);
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Плейсхолдеры {{...}}: заметная пометка в режиме разработки */
+.ph-dev {
+  background: #fff1a8;
+  color: #6b3d00;
+  border: 1px dashed #c47f00;
+  border-radius: 4px;
+  padding: 0 0.3em;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+/* Светлые блоки ниже первого экрана не считают стили и раскладку, пока далеко от экрана.
+   Тёмные блоки (начисления, форма) не трогаем: аудит контраста должен видеть их фон. */
+#fakty,
+#vygoda,
+#puti,
+#kalkulyator,
+#podderzhka,
+#produkciya,
+#nabory,
+#start,
+#voprosy {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
+}
+
+.ph-prod {
+  border-bottom: 1px dashed currentColor;
+  opacity: 0.85;
+}

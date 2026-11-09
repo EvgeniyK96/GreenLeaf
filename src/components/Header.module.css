@@ -1,0 +1,93 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: var(--header-h);
+  background: rgb(255 255 255 / 0.97);
+  border-bottom: 1px solid rgb(211 228 203 / 0.7);
+}
+
+.inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  color: var(--c-forest);
+  text-decoration: none;
+  min-height: 44px;
+}
+.brand:hover {
+  color: var(--c-forest);
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.brandName {
+  font-family: var(--f-display);
+  font-weight: 650;
+  font-size: 0.95rem;
+}
+
+.brandSub {
+  font-size: var(--t-xs);
+  color: var(--c-muted);
+}
+
+.nav {
+  display: none;
+}
+
+.nav ul {
+  display: flex;
+  gap: var(--s-2);
+  list-style: none;
+}
+
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  color: var(--c-ink);
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 12px 3px 12px 3px;
+}
+.nav a:hover {
+  background: var(--c-mint);
+  color: var(--c-forest);
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    display: block;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .brandSub {
+    display: none;
+  }
+}
+
+/* На телефоне «Написать» — липкая кнопка снизу; в шапке не дублируем */
+.cta {
+  display: none;
+}
+@media (min-width: 960px) {
+  .cta {
+    display: inline-flex;
+  }
+}

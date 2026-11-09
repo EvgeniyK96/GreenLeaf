@@ -1,0 +1,92 @@
+.section {
+  background: var(--c-mint);
+}
+
+.tags {
+  list-style: none;
+  margin-top: var(--s-7);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-4) var(--s-3);
+}
+
+/* Ценник: отверстие под нитку и скошенный верх */
+.tag {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-6) var(--s-4) var(--s-4);
+  background: var(--c-paper);
+  border-radius: 20px 6px 20px 6px;
+  box-shadow: var(--sh-soft);
+  -webkit-mask: radial-gradient(circle 7px at 22px 20px, #0000 98%, #000);
+  mask: radial-gradient(circle 7px at 22px 20px, #0000 98%, #000);
+}
+
+.section_ {
+  position: absolute;
+  top: 12px;
+  left: 40px;
+  font-size: var(--t-xs);
+  font-weight: 600;
+  color: var(--c-leaf);
+  text-decoration: none;
+  padding: 2px 0;
+}
+.section_:hover {
+  text-decoration: underline;
+}
+
+.name {
+  hyphens: auto;
+  overflow-wrap: break-word;
+  font-size: var(--t-sm);
+  line-height: 1.35;
+  color: var(--c-ink);
+  flex: 1;
+}
+
+.prices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--s-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.retail {
+  color: var(--c-muted);
+  font-size: var(--t-sm);
+}
+
+.partner {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.55rem);
+  color: var(--c-leaf);
+}
+
+.pv {
+  font-size: var(--t-xs);
+  font-weight: 600;
+  color: var(--c-sky-ink);
+}
+
+.note {
+  margin-top: var(--s-5);
+}
+
+.more {
+  margin-top: var(--s-5);
+}
+
+@media (min-width: 900px) {
+  .tags {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--s-5);
+  }
+  .tag {
+    padding: var(--s-6) var(--s-5) var(--s-5);
+  }
+}

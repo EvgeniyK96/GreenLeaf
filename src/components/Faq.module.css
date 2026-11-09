@@ -1,0 +1,29 @@
+.section {
+  background: var(--c-mint);
+}
+
+.grid {
+  display: grid;
+  gap: var(--s-6);
+}
+
+.side {
+  display: grid;
+  gap: var(--s-4);
+  justify-items: start;
+  align-content: start;
+}
+.side p {
+  margin-top: 0;
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: var(--s-8);
+  }
+  .side {
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-6));
+  }
+}

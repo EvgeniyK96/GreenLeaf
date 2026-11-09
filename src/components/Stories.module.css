@@ -1,0 +1,20 @@
+.list {
+  list-style: none;
+  margin-top: var(--s-6);
+  display: grid;
+  gap: var(--s-5);
+}
+.card {
+  display: grid;
+  gap: var(--s-2);
+}
+.card img {
+  border-radius: var(--r-leaf);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+@media (min-width: 900px) {
+  .list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
