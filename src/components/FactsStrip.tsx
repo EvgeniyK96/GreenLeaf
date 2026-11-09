@@ -10,12 +10,12 @@ export function FactsStrip() {
   return (
     <section id="fakty" className={styles.strip} aria-labelledby="facts-title">
       <div className={ui.container}>
-        <h2 id="facts-title" className={styles.title}>
+        <h2 id="facts-title" className={styles.title} data-reveal="up">
           {factsStrip.title}
         </h2>
         <dl className={styles.list}>
-          {items.map((f) => (
-            <div key={f.label} className={styles.item}>
+          {items.map((f, i) => (
+            <div key={f.label} className={styles.item} data-reveal="up" style={{ ['--i' as string]: i }}>
               <dt className={styles.value}>
                 <Ph value={f.value} />
               </dt>
@@ -23,7 +23,9 @@ export function FactsStrip() {
             </div>
           ))}
         </dl>
-        <p className={`${ui.note} ${styles.note}`}>{factsStrip.note}</p>
+        <p className={`${ui.note} ${styles.note}`} data-reveal="fade" style={{ ['--i' as string]: 4 }}>
+          {factsStrip.note}
+        </p>
       </div>
     </section>
   )

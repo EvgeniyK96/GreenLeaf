@@ -1,7 +1,6 @@
 import { nav } from '../content/site'
 import { owner } from '../content/owner'
 import { LeafMark } from './LeafMark'
-import { wakeIsland } from '../lib/islands'
 import ui from './ui.module.css'
 import styles from './Header.module.css'
 
@@ -25,7 +24,7 @@ export function Header() {
             ))}
           </ul>
         </nav>
-        <a href="#zayavka" onClick={() => wakeIsland('zayavka')} className={`${ui.btn} ${ui.primary} ${ui.small} ${styles.cta}`}>
+        <a href="#zayavka" className={`${ui.btn} ${ui.primary} ${ui.small} ${styles.cta}`}>
           Написать
         </a>
       </div>

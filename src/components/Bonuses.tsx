@@ -3,7 +3,6 @@ import { useMotionValue, useScroll, useSpring } from 'motion/react'
 import { bonusesCopy as copy, bonusGroups } from '../content/bonuses'
 import { planPage, site } from '../content/site'
 import { plural } from '../lib/format'
-import { setLeadStep } from '../lib/leadStore'
 import { GrowthVisual } from '../three/GrowthVisual'
 import { Accordion } from './Accordion'
 import ui from './ui.module.css'
@@ -56,7 +55,7 @@ export function Bonuses() {
   return (
     <section id="nachisleniya" className={styles.section} aria-labelledby="bonus-title">
       <div className={`${ui.container} ${styles.grid}`}>
-        <div className={styles.visualCol}>
+        <div className={styles.visualCol} data-reveal="fade" style={{ ['--i' as string]: 2 }}>
           <div className={styles.sticky}>
             <GrowthVisual progress={progress} activeGroup={activeMv} />
             <p className={styles.visualCaption}>
@@ -67,12 +66,14 @@ export function Bonuses() {
         </div>
 
         <div className={styles.content}>
-          <h2 id="bonus-title" className={`${ui.h2} ${styles.title}`}>
+          <h2 id="bonus-title" className={`${ui.h2} ${styles.title}`} data-reveal="up">
             {copy.title}
           </h2>
-          <p className={styles.lead}>{copy.lead}</p>
+          <p className={styles.lead} data-reveal="up" style={{ ['--i' as string]: 1 }}>
+            {copy.lead}
+          </p>
 
-          <dl className={styles.terms}>
+          <dl className={styles.terms} data-reveal="up" style={{ ['--i' as string]: 2 }}>
             {copy.terms.map((t) => (
               <div key={t.term}>
                 <dt>{t.term}</dt>
@@ -89,6 +90,7 @@ export function Bonuses() {
                   groupEls.current[gi] = el
                 }}
                 data-index={gi}
+                data-reveal="up"
                 className={`${styles.group} ${active === gi ? styles.groupActive : ''}`}
                 aria-labelledby={`bonus-group-${g.id}`}
               >
@@ -151,12 +153,14 @@ export function Bonuses() {
             ))}
           </div>
 
-          <p className={styles.note}>{copy.note}</p>
-          <div className={`${ui.actions} ${styles.actions}`}>
+          <p className={styles.note} data-reveal="fade">
+            {copy.note}
+          </p>
+          <div className={`${ui.actions} ${styles.actions}`} data-reveal="up" style={{ ['--i' as string]: 1 }}>
             <a href={site.planPdf} target="_blank" rel="noopener" className={`${ui.btn} ${ui.onDark}`}>
               {copy.ctaPlan}
             </a>
-            <a href="#zayavka" className={`${ui.btn} ${ui.ghostDark}`} onClick={() => setLeadStep('meet')}>
+            <a href="#zayavka" className={`${ui.btn} ${ui.ghostDark}`} data-step="meet">
               {copy.ctaMeet}
             </a>
           </div>

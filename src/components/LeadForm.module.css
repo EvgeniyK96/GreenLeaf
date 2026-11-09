@@ -291,3 +291,57 @@
     align-items: start;
   }
 }
+
+/* ---- Вариант «окно поверх страницы» ---- */
+.modalBody {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.modalTitle {
+  font-size: var(--t-2xl);
+  padding-right: 3rem; /* место под кнопку закрытия */
+}
+
+.modalLead {
+  color: var(--c-muted);
+  margin-top: calc(var(--s-2) * -1);
+}
+
+.cardFlat {
+  color: var(--c-ink);
+}
+.cardFlat a {
+  color: var(--c-leaf);
+}
+
+.modalExtras {
+  display: grid;
+  gap: var(--s-4);
+  padding-top: var(--s-5);
+  border-top: 1px dashed var(--c-line);
+}
+
+/* Блок ID и контакты на светлом фоне */
+.light {
+  color: var(--c-ink);
+}
+.idBox.light {
+  background: var(--c-mint);
+  border-color: var(--c-line);
+}
+.light .idLabel {
+  color: var(--c-muted);
+}
+.light .idValue {
+  color: var(--c-forest);
+}
+.light .idMissing {
+  color: var(--c-muted);
+}
+.light .live {
+  color: var(--c-leaf);
+}
+.light .directLabel {
+  color: var(--c-forest);
+}

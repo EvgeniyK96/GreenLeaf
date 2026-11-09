@@ -2,22 +2,39 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  display: grid;
+  /* Отступ сверху вместо центрирования по высоте: при подгрузке шрифта блок не «прыгает» (CLS) */
+  justify-items: center;
+  align-items: start;
+  min-height: calc(100svh - var(--header-h));
+  padding-block: clamp(2.5rem, 2rem + 6vh, 6rem) clamp(3rem, 2rem + 5vh, 6rem);
   background:
-    radial-gradient(120% 70% at 100% 0%, var(--c-mint) 0%, transparent 60%),
+    radial-gradient(120% 80% at 50% 0%, var(--c-mint) 0%, transparent 70%),
     var(--c-paper);
-  padding-top: 150px;
-  padding-bottom: clamp(3rem, 2rem + 4vw, 5.5rem);
+  text-align: center;
 }
 
 .inner {
   position: relative;
   z-index: 1;
+  display: grid;
+  justify-items: center;
+  /* Мягкое белое свечение: текст читается, даже когда за ним пролетает лист */
+  text-shadow:
+    0 0 14px rgb(255 255 255 / 0.95),
+    0 0 4px rgb(255 255 255 / 0.9);
+}
+
+.inner a,
+.inner li {
+  text-shadow: none;
 }
 
 .intro {
   font-size: var(--t-sm);
   font-weight: 500;
   color: var(--c-leaf);
+  max-width: 26em;
 }
 
 .title {
@@ -26,7 +43,11 @@
   font-weight: 700;
   line-height: 1.06;
   letter-spacing: -0.02em;
-  max-width: 15ch;
+  /* em, а не ch: ch зависит от шрифта, и до загрузки Unbounded заголовок был бы уже (CLS) */
+  max-width: 12em;
+  /* Место под 3 строки заранее: запасной шрифт уже, переносы до загрузки Unbounded другие */
+  min-height: calc(3 * 1.06em);
+  min-height: 3lh;
 }
 
 .lead {
@@ -34,29 +55,38 @@
   font-size: var(--t-lg);
   line-height: 1.5;
   color: var(--c-ink);
-  max-width: 54ch;
+  max-width: 30em;
 }
 
 .actions {
   margin-top: var(--s-6);
+  justify-content: center;
+  width: 100%;
 }
 
 .actions a {
   flex: 1 1 100%;
 }
 
+/* Вторичная кнопка поверх листьев — с подложкой, чтобы контур читался */
+.secondary {
+  background: rgb(255 255 255 / 0.85);
+}
+
 .proof {
   list-style: none;
   margin-top: var(--s-7);
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--s-3);
+  width: 100%;
+  max-width: 46rem;
 }
 
 .proof li {
   display: grid;
-  grid-template-columns: 5.2rem 1fr;
-  align-items: baseline;
-  gap: var(--s-3);
+  gap: var(--s-1);
+  align-content: start;
   padding-top: var(--s-3);
   border-top: 1px solid var(--c-line);
 }
@@ -64,13 +94,13 @@
 .proofValue {
   font-family: var(--f-display);
   font-weight: 650;
-  font-size: 1.35rem;
+  font-size: clamp(1.15rem, 0.95rem + 1vw, 1.6rem);
   color: var(--c-leaf);
   font-variant-numeric: tabular-nums;
 }
 
 .proofLabel {
-  font-size: var(--t-sm);
+  font-size: var(--t-xs);
   color: var(--c-muted);
   line-height: 1.4;
 }
@@ -79,48 +109,36 @@
   .actions a {
     flex: 0 0 auto;
   }
+  .proofLabel {
+    font-size: var(--t-sm);
+  }
 }
 
 @media (min-width: 900px) {
   .hero {
-    padding-top: clamp(5rem, 9vh, 8rem);
-    min-height: min(860px, calc(100svh - var(--header-h)));
-    display: flex;
-    align-items: center;
-  }
-  .inner {
-    width: 100%;
-  }
-  .title,
-  .lead,
-  .proof {
-    max-width: min(46rem, 58%);
-  }
-  .title {
-    max-width: min(15ch, 60%);
+    min-height: min(900px, calc(100svh - var(--header-h)));
   }
   .proof {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--s-5);
-  }
-  .proof li {
-    grid-template-columns: 1fr;
-    gap: var(--s-1);
+    gap: var(--s-6);
   }
 }
 
-/* Единственная анимация загрузки: короткий подъём кнопок и фактов. Заголовок и подзаголовок
-   видны сразу — они кандидаты LCP, анимация прозрачности задержала бы метрику. */
+/* Подъём кнопок и фактов. Заголовок и подзаголовок видны сразу (кандидаты LCP).
+   Если показывается заставка, ждём её ухода. */
 @media (prefers-reduced-motion: no-preference) {
   .seq {
     animation: rise var(--d-slow) var(--ease-out) both;
+    animation-delay: var(--seq, 0ms);
+  }
+  :global(html.splash) .seq {
+    animation-delay: calc(var(--splash-ms, 1100ms) + var(--seq, 0ms));
   }
 }
 
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;

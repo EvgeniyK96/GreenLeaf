@@ -1,20 +1,31 @@
+/* Листья — фон всего первого экрана */
 .hero {
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 250px;
+  inset: 0;
   overflow: hidden;
   pointer-events: none;
-  /* Листья не заходят под текст: на телефоне — полоса сверху, на десктопе — правая часть */
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 82%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 82%);
 }
 
-@media (min-width: 900px) {
-  .hero {
-    inset: 0;
-    height: auto;
-    -webkit-mask-image: linear-gradient(to right, transparent 44%, #000 66%);
-    mask-image: linear-gradient(to right, transparent 44%, #000 66%);
+/* Светлая подложка под текстом по центру: листья видны по краям и в глубине, текст читается */
+.veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 58% 52% at 50% 52%,
+    rgb(255 255 255 / 0.9) 0%,
+    rgb(255 255 255 / 0.72) 45%,
+    rgb(255 255 255 / 0) 100%
+  );
+}
+
+@media (max-width: 640px) {
+  .veil {
+    background: radial-gradient(
+      ellipse 95% 55% at 50% 46%,
+      rgb(255 255 255 / 0.82) 0%,
+      rgb(255 255 255 / 0.5) 60%,
+      rgb(255 255 255 / 0) 100%
+    );
   }
 }
 

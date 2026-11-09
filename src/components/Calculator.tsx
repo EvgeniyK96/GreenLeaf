@@ -2,7 +2,6 @@ import { useEffect, useId, useState } from 'react'
 import { calculator as copy } from '../content/copy'
 import { site } from '../content/site'
 import { rub } from '../lib/format'
-import { setLeadStep } from '../lib/leadStore'
 import { AnimatedRub } from './AnimatedNumber'
 import ui from './ui.module.css'
 import styles from './Calculator.module.css'
@@ -39,7 +38,7 @@ export function Calculator() {
   return (
     <section id="kalkulyator" className={`${ui.section} ${styles.section}`} aria-labelledby="calc-title">
       <div className={`${ui.container} ${styles.grid}`}>
-        <div className={styles.controls}>
+        <div className={styles.controls} data-reveal="up">
           <h2 id="calc-title" className={ui.h2}>
             {copy.title}
           </h2>
@@ -99,7 +98,7 @@ export function Calculator() {
           </div>
         </div>
 
-        <figure className={styles.receipt} aria-labelledby="receipt-title">
+        <figure className={styles.receipt} aria-labelledby="receipt-title" data-reveal="print" style={{ ['--i' as string]: 2 }}>
           <figcaption id="receipt-title" className={styles.receiptHead}>
             <span className={styles.receiptTitle}>{copy.receiptTitle}</span>
             <span className={styles.receiptDate}>цены каталога на {site.pricesDate}</span>
@@ -149,9 +148,9 @@ export function Calculator() {
           </p>
         </figure>
 
-        <div className={styles.after}>
+        <div className={styles.after} data-reveal="fade" style={{ ['--i' as string]: 3 }}>
           <p className={ui.note}>{copy.note}</p>
-          <a href="#zayavka" className={`${ui.btn} ${ui.primary}`} onClick={() => setLeadStep('meet')}>
+          <a href="#zayavka" className={`${ui.btn} ${ui.primary}`} data-step="meet">
             {copy.cta}
           </a>
         </div>

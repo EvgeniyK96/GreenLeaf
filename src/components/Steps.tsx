@@ -1,6 +1,5 @@
 import { steps } from '../content/copy'
 import { owner } from '../content/owner'
-import { setLeadStep } from '../lib/leadStore'
 import { MeetPlace, Ph } from './Ph'
 import ui from './ui.module.css'
 import styles from './Steps.module.css'
@@ -9,12 +8,12 @@ export function Steps() {
   return (
     <section id="start" className={ui.section} aria-labelledby="steps-title">
       <div className={ui.container}>
-        <h2 id="steps-title" className={ui.h2}>
+        <h2 id="steps-title" className={ui.h2} data-reveal="up">
           {steps.title}
         </h2>
         <ol className={styles.list}>
           {steps.items.map((s, i) => (
-            <li key={i} className={styles.step}>
+            <li key={i} className={styles.step} data-reveal="up" style={{ ['--i' as string]: 1 }}>
               <span className={styles.node} aria-hidden="true">
                 {i + 1}
               </span>
@@ -29,7 +28,7 @@ export function Steps() {
                       </span>
                     </h3>
                     <p>{s.a.text}</p>
-                    <a href="#zayavka" className={`${ui.btn} ${ui.primary} ${ui.small}`} onClick={() => setLeadStep('meet')}>
+                    <a href="#zayavka" className={`${ui.btn} ${ui.primary} ${ui.small}`} data-step="meet">
                       {s.a.cta}
                     </a>
                   </div>
@@ -40,7 +39,7 @@ export function Steps() {
                     <a
                       href="#zayavka"
                       className={`${ui.btn} ${ui.secondary} ${ui.small}`}
-                      onClick={() => setLeadStep('register')}
+                      data-step="register"
                     >
                       {s.b.cta}
                     </a>
@@ -65,7 +64,7 @@ export function Steps() {
             </li>
           ))}
         </ol>
-        <p className={styles.prepare}>{steps.prepare}</p>
+        <p className={styles.prepare} data-reveal="fade">{steps.prepare}</p>
       </div>
     </section>
   )

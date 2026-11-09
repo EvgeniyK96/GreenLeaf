@@ -4,14 +4,14 @@ import { SceneBoundary } from './SceneBoundary'
 import { HeroPoster } from './Posters'
 import { useInViewport } from '../hooks/useInViewport'
 import { useAfterLoadIdle } from '../hooks/useAfterLoadIdle'
-import { useMediaQuery } from '../hooks/useMediaQuery'
 import styles from './Visual.module.css'
 
 const HeroScene = lazy(() => import('./HeroScene'))
 
 /**
- * Фон hero: сначала SVG-постер (сразу, без JS-нагрузки), затем — после load и простоя —
- * лениво грузится three.js-сцена и плавно проявляется поверх. Вне экрана рендер на паузе.
+ * Фон hero на весь экран: сначала SVG-постер (сразу, без JS-нагрузки), затем — после первого
+ * взаимодействия или простоя — лениво грузится three.js-сцена и плавно проявляется поверх.
+ * Светлая подложка по центру держит контраст текста. Вне экрана рендер на паузе.
  */
 export function HeroVisual() {
   const cheap = useCheapTier()
@@ -24,7 +24,6 @@ export function HeroVisual() {
   const [ready, setReady] = useState(false)
   const want3d = tier === 'low' || tier === 'high'
   const shown = ready && want3d
-  const wide = useMediaQuery('(min-width: 900px)')
   const pointer = useRef({ x: 0, y: 0 })
   const scroll = useRef(0)
 
@@ -58,7 +57,6 @@ export function HeroVisual() {
               <HeroScene
                 tier={tier}
                 active={inView}
-                layout={wide ? 'side' : 'top'}
                 pointer={pointer}
                 scroll={scroll}
                 onReady={() => setReady(true)}
@@ -67,6 +65,7 @@ export function HeroVisual() {
           </SceneBoundary>
         </div>
       )}
+      <div className={styles.veil} />
     </div>
   )
 }

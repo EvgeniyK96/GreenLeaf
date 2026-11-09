@@ -137,22 +137,89 @@ section[id],
   font-weight: 600;
   white-space: nowrap;
 }
-/* Светлые блоки ниже первого экрана не считают стили и раскладку, пока далеко от экрана.
-   Тёмные блоки (начисления, форма) не трогаем: аудит контраста должен видеть их фон. */
-#fakty,
-#vygoda,
-#puti,
-#kalkulyator,
-#podderzhka,
-#produkciya,
-#nabory,
-#start,
-#voprosy {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 1000px;
-}
-
 .ph-prod {
   border-bottom: 1px dashed currentColor;
   opacity: 0.85;
+}
+
+/* ---- Появление блоков при прокрутке (флаг html.reveal и наблюдатель — в index.html) ---- */
+.reveal [data-reveal] {
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.8s var(--ease-out),
+    clip-path 1s var(--ease-out),
+    border-color 0.4s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 110ms);
+}
+.reveal [data-reveal]:not([data-shown]) {
+  opacity: 0;
+  transform: var(--reveal-from, translateY(28px));
+}
+[data-reveal='left'] {
+  --reveal-from: translateX(-40px);
+}
+[data-reveal='right'] {
+  --reveal-from: translateX(40px);
+}
+[data-reveal='scale'] {
+  --reveal-from: translateY(20px) scale(0.94);
+}
+[data-reveal='drop'] {
+  --reveal-from: translateY(-40px);
+}
+[data-reveal='fade'] {
+  --reveal-from: none;
+}
+/* Чек калькулятора «печатается» сверху вниз */
+.reveal [data-reveal='print']:not([data-shown]) {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 100% 0);
+}
+.reveal [data-reveal='print'][data-shown] {
+  clip-path: inset(0 0 0 0);
+}
+
+@media print {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* ---- Окно заявки: страница под ним не прокручивается ---- */
+html {
+  scrollbar-gutter: stable;
+}
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* Ничего не выходит за ширину экрана (иначе мобильный браузер расширяет страницу
+   и фиксированные элементы уезжают). clip, в отличие от hidden, не ломает position: sticky. */
+html,
+body {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+/* На узких экранах выезд сбоку заменяем подъёмом снизу */
+@media (max-width: 640px) {
+  [data-reveal='left'],
+  [data-reveal='right'] {
+    --reveal-from: translateY(28px);
+  }
+}
+
+/* Светлые блоки ниже первого экрана не считают стили и раскладку, пока далеко от экрана.
+   Только с JS (html.js): переходы по якорям тогда корректирует скрипт в index.html,
+   без JS блоки рисуются как обычно и якоря точные. Тёмные блоки (начисления, форма) не трогаем:
+   аудит контраста должен видеть их фон. */
+html.js :is(#fakty, #vygoda, #puti, #kalkulyator, #podderzhka, #produkciya, #nabory, #start, #voprosy) {
+  /* auto: браузер запоминает реальную высоту, как только блок хоть раз отрисован */
+  contain-intrinsic-size: auto 1000px;
+}
+html.js:not(.cv-all) :is(#fakty, #vygoda, #puti, #kalkulyator, #podderzhka, #produkciya, #nabory, #start, #voprosy) {
+  content-visibility: auto;
 }

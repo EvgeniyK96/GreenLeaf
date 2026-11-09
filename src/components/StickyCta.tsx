@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { stickyCta } from '../content/copy'
+import { useLeadModalOpen } from '../lib/leadStore'
 import styles from './StickyCta.module.css'
-import { wakeIsland } from '../lib/islands'
 
-/** Мобильная липкая кнопка: появляется после hero, прячется у формы. */
+/** Мобильная липкая кнопка: появляется после hero, прячется у формы и пока открыто окно заявки. */
 export function StickyCta() {
-  const [visible, setVisible] = useState(false)
+  const [inView, setVisible] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const modalOpen = useLeadModalOpen()
+  const visible = inView && !modalOpen
 
   useEffect(() => {
     const hero = document.getElementById('top')
@@ -35,7 +37,7 @@ export function StickyCta() {
   if (!mounted) return null
   return (
     <div className={`${styles.bar} ${visible ? styles.on : ''}`} aria-hidden={!visible}>
-      <a href="#zayavka" onClick={() => wakeIsland('zayavka')} className={styles.btn} tabIndex={visible ? 0 : -1}>
+      <a href="#zayavka" className={styles.btn} tabIndex={visible ? 0 : -1}>
         {stickyCta}
       </a>
     </div>

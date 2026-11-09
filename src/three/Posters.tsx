@@ -7,38 +7,46 @@ const LEAF = 'M0 0C24-18 30-62 0-100C-30-62-24-18 0 0Z'
 
 type L = { x: number; y: number; r: number; s: number; c: string; o?: number }
 
+/** Композиция как у 3D-фона: x и y — проценты экрана (листья по краям, в центре бледные и мелкие). */
 const HERO_LEAVES: L[] = [
-  { x: 905, y: 120, r: 35, s: 1.5, c: '#2b7a4b' },
-  { x: 760, y: 70, r: -40, s: 1.05, c: '#86b726' },
-  { x: 850, y: 300, r: 120, s: 1.25, c: '#4eae36' },
-  { x: 680, y: 210, r: 75, s: 0.8, c: '#3c9455', o: 0.75 },
-  { x: 965, y: 420, r: -150, s: 1.1, c: '#a9d24a' },
-  { x: 720, y: 430, r: 15, s: 1.35, c: '#1f6b3f' },
-  { x: 610, y: 90, r: 160, s: 0.65, c: '#5cbf5a', o: 0.7 },
-  { x: 840, y: 560, r: 60, s: 0.9, c: '#4eae36', o: 0.85 },
-  { x: 990, y: 230, r: -70, s: 0.75, c: '#86b726' },
-  { x: 640, y: 610, r: -120, s: 0.7, c: '#a9d24a', o: 0.7 },
-  { x: 560, y: 330, r: 30, s: 0.5, c: '#2b7a4b', o: 0.45 },
-  { x: 930, y: 640, r: 100, s: 1.2, c: '#3c9455' },
+  { x: 6, y: 14, r: 35, s: 1.1, c: '#2b7a4b' },
+  { x: 16, y: 33, r: -50, s: 0.8, c: '#86b726', o: 0.85 },
+  { x: 4, y: 53, r: 120, s: 1.2, c: '#4eae36' },
+  { x: 14, y: 71, r: -20, s: 0.9, c: '#1f6b3f' },
+  { x: 7, y: 90, r: 160, s: 1, c: '#a9d24a' },
+  { x: 23, y: 8, r: 80, s: 0.6, c: '#3c9455', o: 0.6 },
+  { x: 25, y: 93, r: -110, s: 0.7, c: '#5cbf5a', o: 0.65 },
+  { x: 94, y: 12, r: -35, s: 1.15, c: '#4eae36' },
+  { x: 84, y: 31, r: 50, s: 0.85, c: '#2b7a4b', o: 0.85 },
+  { x: 96, y: 51, r: -120, s: 1.1, c: '#86b726' },
+  { x: 86, y: 73, r: 20, s: 0.95, c: '#3c9455' },
+  { x: 93, y: 91, r: -160, s: 1, c: '#1f6b3f' },
+  { x: 77, y: 6, r: -80, s: 0.6, c: '#a9d24a', o: 0.6 },
+  { x: 75, y: 94, r: 110, s: 0.7, c: '#4eae36', o: 0.65 },
+  { x: 38, y: 6, r: 30, s: 0.45, c: '#4eae36', o: 0.3 },
+  { x: 62, y: 95, r: -40, s: 0.45, c: '#2b7a4b', o: 0.3 },
+  { x: 52, y: 3, r: 100, s: 0.4, c: '#86b726', o: 0.28 },
 ]
 
 function Leaf({ x, y, r, s, c, o = 1 }: L) {
   return (
-    <g transform={`translate(${x} ${y}) rotate(${r}) scale(${s})`} opacity={o}>
-      <path d={LEAF} fill={c} />
-      <path d="M0-3V-94" stroke="#fff" strokeOpacity=".55" strokeWidth="2" strokeLinecap="round" />
-    </g>
+    <svg x={`${x}%`} y={`${y}%`} width="1" height="1" overflow="visible">
+      <g transform={`rotate(${r}) scale(${s})`} opacity={o}>
+        <path d={LEAF} fill={c} />
+        <path d="M0-3V-94" stroke="#fff" strokeOpacity=".55" strokeWidth="2" strokeLinecap="round" />
+      </g>
+    </svg>
   )
 }
 
 export function HeroPoster({ className }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 1000 700" preserveAspectRatio="xMaxYMin slice" aria-hidden="true" focusable="false">
+    <svg className={className} width="100%" height="100%" aria-hidden="true" focusable="false">
       {HERO_LEAVES.map((l, i) => (
         <Leaf key={i} {...l} />
       ))}
-      {[...Array(26)].map((_, i) => (
-        <circle key={i} cx={560 + ((i * 97) % 440)} cy={(i * 173) % 700} r={2 + (i % 3)} fill="#86b726" opacity=".45" />
+      {[...Array(30)].map((_, i) => (
+        <circle key={i} cx={`${(i * 37) % 100}%`} cy={`${(i * 61) % 100}%`} r={2 + (i % 3)} fill="#86b726" opacity=".4" />
       ))}
     </svg>
   )

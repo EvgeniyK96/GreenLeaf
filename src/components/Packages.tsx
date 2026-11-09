@@ -112,12 +112,14 @@ export function Packages() {
   return (
     <section id="nabory" className={ui.section} aria-labelledby="packages-title">
       <div className={ui.container}>
-        <h2 id="packages-title" className={ui.h2}>
+        <h2 id="packages-title" className={ui.h2} data-reveal="up">
           {copy.title}
         </h2>
-        <p className={ui.lead}>{copy.lead}</p>
+        <p className={ui.lead} data-reveal="up" style={{ ['--i' as string]: 1 }}>
+          {copy.lead}
+        </p>
 
-        <aside className={styles.hint} aria-labelledby="pkg-hint">
+        <aside className={styles.hint} aria-labelledby="pkg-hint" data-reveal="left" style={{ ['--i' as string]: 2 }}>
           <h3 id="pkg-hint" className={styles.hintTitle}>
             {copy.hintTitle}
           </h3>
@@ -128,15 +130,17 @@ export function Packages() {
           <div key={g.title} className={styles.group}>
             <h3 className={styles.groupTitle}>{g.title}</h3>
             <div className={styles.cards} role="list">
-              {g.items.map((p) => (
-                <div key={p.id} role="listitem" className={styles.cell}>
+              {g.items.map((p, i) => (
+                <div key={p.id} role="listitem" className={styles.cell} data-reveal="scale" style={{ ['--i' as string]: i }}>
                   <PackageCard p={p} tilt={tilt} />
                 </div>
               ))}
             </div>
           </div>
         ))}
-        <p className={`${ui.note} ${styles.note}`}>{copy.note}</p>
+        <p className={`${ui.note} ${styles.note}`} data-reveal="fade">
+          {copy.note}
+        </p>
       </div>
     </section>
   )

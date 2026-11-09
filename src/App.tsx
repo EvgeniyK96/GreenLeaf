@@ -16,6 +16,7 @@ import { Faq } from './components/Faq'
 import { LeadForm } from './components/LeadForm'
 import { Legal } from './components/Legal'
 import { StickyCta } from './components/StickyCta'
+import { LeadModal } from './components/LeadModal'
 
 /** Порядок блоков: узнал → поверил → посчитал → понял, за что платят → страх снят → действие. */
 export default function App() {
@@ -68,6 +69,7 @@ export default function App() {
         <Legal />
       </Island>
       <StickyCta />
+      <LeadModal />
     </MotionConfig>
   )
 }

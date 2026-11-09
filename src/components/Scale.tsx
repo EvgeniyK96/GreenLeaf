@@ -2,7 +2,6 @@ import { scale } from '../content/copy'
 import { owner } from '../content/owner'
 import { isFilled, SHOW_PLACEHOLDERS } from '../content/placeholders'
 import { Ph } from './Ph'
-import { wakeIsland } from '../lib/islands'
 import ui from './ui.module.css'
 import styles from './Scale.module.css'
 
@@ -12,11 +11,11 @@ export function Scale() {
   return (
     <section id="podderzhka" className={ui.section} aria-labelledby="scale-title">
       <div className={ui.container}>
-        <h2 id="scale-title" className={ui.h2}>
+        <h2 id="scale-title" className={ui.h2} data-reveal="up">
           {scale.title}
         </h2>
         <div className={styles.grid}>
-          <div className={styles.col}>
+          <div className={styles.col} data-reveal="left">
             <h3 className={styles.h3}>{scale.companyTitle}</h3>
             <ul className={styles.facts}>
               {scale.companyFacts.map((f) => (
@@ -47,7 +46,7 @@ export function Scale() {
               </p>
             )}
           </div>
-          <div className={`${styles.col} ${styles.mentor}`}>
+          <div className={`${styles.col} ${styles.mentor}`} data-reveal="right" style={{ ['--i' as string]: 2 }}>
             <h3 className={styles.h3}>{scale.mentorTitle}</h3>
             <p className={styles.mentorName}>{owner.name}, ваш наставник в программе</p>
             <ul className={styles.checks}>
@@ -55,7 +54,7 @@ export function Scale() {
                 <li key={m}>{m}</li>
               ))}
             </ul>
-            <a href="#zayavka" onClick={() => wakeIsland('zayavka')} className={`${ui.btn} ${ui.primary}`}>
+            <a href="#zayavka" className={`${ui.btn} ${ui.primary}`}>
               Познакомиться
             </a>
           </div>
